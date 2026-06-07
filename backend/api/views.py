@@ -1,4 +1,19 @@
+import json
 from django.http import JsonResponse
 
 def api_home(request, *args, **kwargs):
-    return JsonResponse({'message': 'Hello John, this is your first Django API response!'})
+    print(request.GET)
+    body = request.body
+    data = {}
+    try:
+        data = json.loads(body)
+    except:
+        pass
+
+    print(data)
+
+    data['params'] = dict(request.GET)
+    data["headers"] = dict(request.headers)
+    data['content_type'] = request.content_type
+
+    return JsonResponse(data)
