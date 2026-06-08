@@ -12,6 +12,6 @@ def api_home(request, *args, **kwargs):
     data = {}
 
     if model_data:
-        data = model_to_dict(model_data)
-        #data = model_to_dict(model_data, fields=['id', 'title'])
+        #data = model_to_dict(model_data)
+        data = model_to_dict(model_data, fields=['id', 'title', 'price', 'sale_price'])
     return Response(data)
