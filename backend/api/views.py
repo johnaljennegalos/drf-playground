@@ -11,6 +11,6 @@ from products.serializers import ProductsSerializer
 def api_home(request, *args, **kwargs):
     serializer = ProductsSerializer(data=request.data)
     if serializer.is_valid():
-        print(serializer.data)
-        data = serializer.data
-    return Response(data)
+        instance = serializer.save()
+        print(instance)
+        return Response(serializer.data)
