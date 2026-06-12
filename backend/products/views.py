@@ -20,3 +20,21 @@ class ProductCreateAPIView(generics.CreateAPIView):
 class ProductDetailsAPIView(generics.RetrieveAPIView):
     queryset = Products.objects.all()
     serializer_class = ProductsSerializer
+
+class ProductListAPIView(generics.ListAPIView):
+    queryset = Products.objects.all()
+    serializer_class = ProductsSerializer
+
+class ProductListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Products.objects.all()
+    serializer_class = ProductsSerializer
+
+    def perform_create(self, serializer):
+        print(serializer.validated_data)
+
+        title = serializer.validated_data['title']
+        content = serializer.validated_data['content'] or None
+
+        if content is None:
+            content = title
+        serializer.save(content=content)
