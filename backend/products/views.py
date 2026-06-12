@@ -20,3 +20,7 @@ class ProductCreateAPIView(generics.CreateAPIView):
 class ProductDetailsAPIView(generics.RetrieveAPIView):
     queryset = Products.objects.all()
     serializer_class = ProductsSerializer
+
+class ProductListAPIView(generics.ListAPIView):
+    queryset = Products.objects.all()
+    serializer_class = ProductsSerializer
